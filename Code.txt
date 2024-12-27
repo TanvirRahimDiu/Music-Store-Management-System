@@ -1,0 +1,101 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class OnlineMusicStore {
+    static List<Album> albums = new ArrayList<>();
+    static List<Order> orders = new ArrayList<>();
+    static User admin = new User("Tanvir", "903");
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\nOnline Music Store Management System");
+            System.out.println("1. Admin Login");
+            System.out.println("2. Customer Login");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    adminLogin(scanner);
+                    break;
+                case 2:
+                    customerLogin(scanner);
+                    break;
+                case 3:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 3);
+
+        scanner.close();
+    }
+
+    private static void adminLogin(Scanner scanner) {
+        System.out.print("Enter username: ");
+        String username = scanner.next();
+        System.out.print("Enter password: ");
+        String password = scanner.next();
+
+        if (username.equals(admin.getUsername()) && password.equals(admin.getPassword())) {
+            System.out.println("\nAdmin Dashboard:");
+            System.out.println("1. Add Album");
+            System.out.println("2. Delete Album");
+            System.out.println("3. List Albums");
+            System.out.println("4. View Orders");
+            System.out.println("5. View Order History");
+
+            int adminChoice = scanner.nextInt();
+        } else {
+            System.out.println("Invalid username or password.");
+        }
+    }
+
+    private static void customerLogin(Scanner scanner) {
+        System.out.println("\nCustomer Dashboard:");
+        System.out.println("1. Browse Albums");
+        System.out.println("2. View Cart");
+        System.out.println("3. Place Order");
+        System.out.println("4. View Order History");
+
+        int customerChoice = scanner.nextInt();
+    }
+
+}
+
+class User {
+    private String username;
+    private String password;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+}
+
+class Album {
+    private String title;
+    private String artist;
+    private double price;
+    
+}
+
+class Order {
+    private int orderId;
+    private List<Album> items;
+    private double totalAmount;
+    }
